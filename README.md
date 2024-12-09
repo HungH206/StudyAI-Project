@@ -1,4 +1,4 @@
-StudiWell - Academic Companion App + AI Mental Health Ally
+StudiWell - Academic Companion WebApp + AI Mental Health Ally
 
 Purpose: Create a personalized app to help students manage their academic life and boost productivity.
 
