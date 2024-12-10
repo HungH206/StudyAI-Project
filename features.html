@@ -24,10 +24,14 @@
                 </ul>
             </nav>
             <div class="account-menu relative">
-                <button class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
-                <div class="account-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign In</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign Up</a>
+                <button id="accountBtn" class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
+                <div id="accountSlideout" class="account-slideout fixed right-0 top-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+                    <div class="p-4">
+                        <h2 class="text-xl font-bold mb-4">Account</h2>
+                        <a href="#" id="signInBtn" class="block w-full text-center bg-blue-500 text-white px-4 py-2 rounded mb-2">Sign In</a>
+                        <a href="#" id="signOutBtn" class="block w-full text-center bg-red-500 text-white px-4 py-2 rounded mb-2 hidden">Sign Out</a>
+                        <button id="closeSlideout" class="mt-4 text-gray-600 hover:text-gray-800">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,10 +45,11 @@
             <section class="feature bg-white rounded-lg shadow-md p-6 grid md:grid-cols-2 gap-6">
                 <div>
                     <h2 class="text-2xl font-semibold text-blue-600 mb-4">1/ AI Study Helper + Chatbot</h2>
-                    <p class="text-gray-700">
-                        An intelligent companion that helps you study more effectively.
-                        Get personalized recommendations and instant answers to your questions.
-                    </p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>An intelligent companion that helps you study more effectively.</li>
+                        <li>Get personalized recommendations and instant answers to your questions.</li>
+                        <li>Personalize habit system that fits your schedule!</li>
+                    </ul>
                 </div>
                 <div class="feature-card bg-pink-50 p-4 rounded-lg">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">AI Chatbot Companion</h3>
@@ -64,7 +69,7 @@
                     </ul>
                 </div>
                 <div class="flex justify-center items-center">
-                    <img src="MentalHealth.png" alt="Mental Health Icon" class="w-48 h-auto">
+                    <img src="MentalHealth.png" alt="Mental Health Icon" class="w-50 h-auto">
                 </div>
             </section>
 
@@ -77,15 +82,15 @@
                     </ul>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="ExampleConnection.png" alt="Connections Icon" class="w-48 h-auto mb-4">
+                    <img src="ExampleConnection.png" alt="Connections Icon" class="w-150 h-auto mb-4">
                     <div class="mentor-icons flex space-x-2">
                         <!-- Add 5 circular divs with user icons here -->
+                        <!--div class="w-10 h-10 bg-gray-300 rounded-full"></div>
                         <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
                         <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
                         <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
                         <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
-                        <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
-                    </div>
+                </div-->
                 </div>
             </section>
         </div>

@@ -24,10 +24,14 @@
                     </ul>
                 </nav>
                 <div class="account-menu relative">
-                    <button class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
-                    <div class="account-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign In</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign Up</a>
+                    <button id="accountBtn" class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
+                    <div id="accountSlideout" class="account-slideout fixed right-0 top-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+                        <div class="p-4">
+                            <h2 class="text-xl font-bold mb-4">Account</h2>
+                            <a href="#" id="signInBtn" class="block w-full text-center bg-blue-500 text-white px-4 py-2 rounded mb-2">Sign In</a>
+                            <a href="#" id="signOutBtn" class="block w-full text-center bg-red-500 text-white px-4 py-2 rounded mb-2 hidden">Sign Out</a>
+                            <button id="closeSlideout" class="mt-4 text-gray-600 hover:text-gray-800">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
