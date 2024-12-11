@@ -1,15 +1,10 @@
-<!-- 
-    This is the homepage for the Study AI Companion workspace.
-    It includes a navigation bar with a logo, search bar, and links to Home, About, and Sign-in pages.
-    Additionally, there is an avatar image representing the user's account.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudiWell</title>
-   <link rel="stylesheet" href="styles.css">
+    <title>Welcome Page - StudiWell</title>
+   <link rel="stylesheet" href="styles/styles.css">
 
 </head>
 <body class="bg-custom-green">
@@ -17,7 +12,7 @@
   <header class="bg-white shadow-md">
     <div class="container mx-auto px-4 py-2 flex items-center justify-between">
       <div class="flex items-center">
-        <img src="Untitled 1.png" alt="StudiWell Logo" class="w-24 h-20"> <!-- Increased logo size -->
+        <img src="images/Untitled 1.png" alt="StudiWell Logo" class="w-24 h-20"> <!-- Increased logo size -->
         <h1 class="text-2xl font-bold text-gray-800 ml-4">StudiWell</h1>
       </div>
       <div class="flex items-center space-x-6">
@@ -45,15 +40,20 @@
   </header>
   
     <main class="main-section bg-gray-100 py-16">
-      <div class="hero-content text-center">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to Studiwell</h1>
-        <p class="text-xl text-gray-700 mb-8">
-          A Study Companion With Mental Health Tracking Functionality,<br>
-          Powered by Azure software with OpenAI integration.
-      </p>
-      <a href="https://github.com/HungH206/StudyWellAI-Project" class="btn bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Try out now</a>
-  </div> 
-  </main>
+        <div class="hero-content text-center">
+          <h1 id="welcomeMessage" class="text-4xl font-bold text-gray-900 mb-4">Welcome, Guest!</h1>
+          <p class="text-xl text-gray-700 mb-8">
+            Start with our user recommendation:
+            <ul>
+              <li>Chat with our AI Assistant Bot</li>
+              <li>Get Recommendation for Mental Health</li>
+              <li>Smart Management Panel</li>
+              <li>Progress bar</li>
+            </ul>
+          </p>
+          <!--a href="https://github.com/HungH206/StudyWellAI-Project" class="btn bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Try it now</a-->
+        </div>
+      </main>
   
   
     <footer class="footer bg-gray-800 text-white py-4 text-center">
@@ -61,6 +61,6 @@
     </footer>
   
 
-  <script src="script.js"></script>
+  <script src="scripts/script.js"></script>
 </body>
 </html>
