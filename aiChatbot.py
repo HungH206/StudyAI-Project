@@ -22,7 +22,7 @@ if not AZURE_OPENAI_ENDPOINT or not AZURE_OPENAI_KEY or not MODEL_NAME:
 client = AzureOpenAI(
     azure_endpoint=AZURE_OPENAI_ENDPOINT,
     api_key=AZURE_OPENAI_KEY,
-    api_version="2024-05-01-preview"
+    api_version="2024-05-01-preview",
 )
 @app.route('/')
 def home():
