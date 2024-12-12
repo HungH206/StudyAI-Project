@@ -1,70 +1,74 @@
+from flask import Flask, request, jsonify
+from openai import AzureOpenAI
 from dotenv import load_dotenv
 import os
-from flask import Flask, request, jsonify
-from openai import OpenAI
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-import requests
 
 # Load environment variables from .env file
 load_dotenv()
 
-# Initialize Flask App
+# Flask App Initialization
 app = Flask(__name__)
 
-# Azure OpenAI and Bot Service configurations
+# Azure OpenAI Configuration
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_OPENAI_KEY = os.getenv("AZURE_OPENAI_KEY")
-AZURE_BOT_SERVICE_ENDPOINT = os.getenv("AZURE_BOT_SERVICE_ENDPOINT")
-MODEL_NAME = "gpt-35-turbo"  # Replace with your Azure OpenAI model
+MODEL_NAME = os.getenv("MODEL_NAME")  # e.g., "gpt-35-turbo"
+
+# Validate Azure OpenAI configuration
+if not AZURE_OPENAI_ENDPOINT or not AZURE_OPENAI_KEY or not MODEL_NAME:
+    raise ValueError("Please ensure AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY, and MODEL_NAME are set in the .env file.")
 
 # Initialize Azure OpenAI client
-# Initialize Azure OpenAI client
-OpenAI.api_key = AZURE_OPENAI_KEY
-OpenAI.api_base = AZURE_OPENAI_ENDPOINT
+client = AzureOpenAI(
+    azure_endpoint=AZURE_OPENAI_ENDPOINT,
+    api_key=AZURE_OPENAI_KEY,
+    api_version="2024-05-01-preview"
+)
+@app.route('/')
+def home():
+    """
+    Default route for the root URL.
+    """
+    return jsonify({"message": "Welcome to the AI Chatbot API! Use the /api/chat endpoint to interact."}), 200
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    """Handles chat messages from the user."""
+    """
+    Chat endpoint to handle user messages and return AI responses.
+    """
     try:
+        # Retrieve user message from the request body
         user_message = request.json.get('message')
         if not user_message:
-            return jsonify({"error": "Message field is required."}), 400
+            return jsonify({"error": "The 'message' field is required."}), 400
 
-        # Use Azure OpenAI to generate a response
-        response = OpenAI.ChatCompletion.create(
+        # Prepare chat prompt
+        chat_prompt = [
+            {"role": "system", "content": "You are a helpful AI assistant."},
+            {"role": "user", "content": user_message}
+        ]
+
+        # Generate AI response
+        completion = client.chat.completions.create(
             model=MODEL_NAME,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": user_message}
-            ]
+            messages=chat_prompt,
+            max_tokens=800,
+            temperature=0.7,
+            top_p=0.95,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None,
+            stream=False
         )
 
-        assistant_message = response['choices'][0]['message']['content']
+        # Extract the AI-generated content
+        ai_response = completion.choices[0].message["content"]
 
-        # Optionally log the chat to Azure Bot Service
-        log_to_bot_service(user_message, assistant_message)
-
-        return jsonify({"response": assistant_message})
+        # Return response to the user
+        return jsonify({"response": ai_response})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
-def log_to_bot_service(user_message, assistant_message):
-    """Logs the conversation to Azure Bot Service."""
-    try:
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {AZURE_OPENAI_KEY}'
-        }
-        payload = {
-            "userMessage": user_message,
-            "botResponse": assistant_message
-        }
-        response = requests.post(AZURE_BOT_SERVICE_ENDPOINT, headers=headers, json=payload)
-        response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        print(f"Failed to log to Bot Service: {e}")
 
 
 if __name__ == '__main__':
