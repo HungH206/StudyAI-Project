@@ -1,75 +1,48 @@
-from flask import Flask, request, jsonify
-from openai import AzureOpenAI
-from dotenv import load_dotenv
+# pip install azure-ai-inference
 import os
+from azure.ai.inference import ChatCompletionsClient
+from azure.core.credentials import AzureKeyCredential
 
-# Load environment variables from .env file
-load_dotenv()
+api_key = os.getenv("AZURE_INFERENCE_CREDENTIAL", 'XLnL0L2hehCJMIAeIa17T4IdxOJwFpkU')
+if not api_key:
+  raise Exception("A key should be provided to invoke the endpoint")
 
-# Flask App Initialization
-app = Flask(__name__)
-
-# Azure OpenAI Configuration
-AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-AZURE_OPENAI_KEY = os.getenv("AZURE_OPENAI_KEY")
-MODEL_NAME = os.getenv("MODEL_NAME")  # e.g., "gpt-35-turbo"
-
-# Validate Azure OpenAI configuration
-if not AZURE_OPENAI_ENDPOINT or not AZURE_OPENAI_KEY or not MODEL_NAME:
-    raise ValueError("Please ensure AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY, and MODEL_NAME are set in the .env file.")
-
-# Initialize Azure OpenAI client
-client = AzureOpenAI(
-    azure_endpoint=AZURE_OPENAI_ENDPOINT,
-    api_key=AZURE_OPENAI_KEY,
-    api_version="2024-05-01-preview",
+client = ChatCompletionsClient(
+    endpoint='https://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com',
+    credential=AzureKeyCredential(api_key)
 )
-@app.route('/')
-def home():
-    """
-    Default route for the root URL.
-    """
-    return jsonify({"message": "Welcome to the AI Chatbot API! Use the /api/chat endpoint to interact."}), 200
 
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    """
-    Chat endpoint to handle user messages and return AI responses.
-    """
-    try:
-        # Retrieve user message from the request body
-        user_message = request.json.get('message')
-        if not user_message:
-            return jsonify({"error": "The 'message' field is required."}), 400
+model_info = client.get_model_info()
+print("Model name:", model_info.model_name)
+print("Model type:", model_info.model_type)
+print("Model provider name:", model_info.model_provider_name)
 
-        # Prepare chat prompt
-        chat_prompt = [
-            {"role": "system", "content": "You are a helpful AI assistant."},
-            {"role": "user", "content": user_message}
-        ]
+payload = {
+  "messages": [
+    {
+      "role": "user",
+      "content": "I am going to Paris, what should I see?"
+    },
+    {
+      "role": "assistant",
+      "content": "Paris, the capital of France, is known for its stunning architecture, art museums, historical landmarks, and romantic atmosphere. Here are some of the top attractions to see in Paris:\n\n1. The Eiffel Tower: The iconic Eiffel Tower is one of the most recognizable landmarks in the world and offers breathtaking views of the city.\n2. The Louvre Museum: The Louvre is one of the world's largest and most famous museums, housing an impressive collection of art and artifacts, including the Mona Lisa.\n3. Notre-Dame Cathedral: This beautiful cathedral is one of the most famous landmarks in Paris and is known for its Gothic architecture and stunning stained glass windows.\n\nThese are just a few of the many attractions that Paris has to offer. With so much to see and do, it's no wonder that Paris is one of the most popular tourist destinations in the world."
+    },
+    {
+      "role": "user",
+      "content": "What is so great about #1?"
+    }
+  ],
+  "max_tokens": 2048,
+  "temperature": 0.8,
+  "top_p": 0.1,
+  "presence_penalty": 0,
+  "frequency_penalty": 0
+}
+response = client.complete(payload)
 
-        # Generate AI response
-        completion = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=chat_prompt,
-            max_tokens=800,
-            temperature=0.7,
-            top_p=0.95,
-            frequency_penalty=0,
-            presence_penalty=0,
-            stop=None,
-            stream=False
-        )
-
-        # Extract the AI-generated content
-        ai_response = completion.choices[0].message["content"]
-
-        # Return response to the user
-        return jsonify({"response": ai_response})
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+print("Response:", response.choices[0].message.content)
+print("Model:", response.model)
+print("Usage:")
+print("	Prompt tokens:", response.usage.prompt_tokens)
+print("	Total tokens:", response.usage.total_tokens)
+print("	Completion tokens:", response.usage.completion_tokens)
