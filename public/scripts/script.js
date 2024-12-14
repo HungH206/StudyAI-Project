@@ -1,38 +1,8 @@
 /*import App from './index.html';*/
+import { auth } from './firebase-config.js';
+import { signOut } from 'firebase/auth';
 
 document.addEventListener('DOMContentLoaded', function() {
-  /*document.getElementById('root').innerHTML = App();*/
-
-    const chatInput = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const chatMessages = document.querySelector('.chat-messages');
-
-    sendBtn.addEventListener('click', sendMessage);
-    chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    });
-
-    function sendMessage() {
-        const message = chatInput.value.trim();
-        if (message) {
-            addMessage('You', message);
-            chatInput.value = '';
-            // Simulate AI response
-            setTimeout(() => {
-                addMessage('AI', 'Thank you for your question. I\'m here to help!');
-            }, 1000);
-        }
-    }
-
-    function addMessage(sender, text) {
-        const messageElement = document.createElement('div');
-        messageElement.innerHTML = `<strong>${sender}:</strong> ${text}`;
-        chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
     const accountBtn = document.getElementById('accountBtn');
     const accountSlideout = document.getElementById('accountSlideout');
     const closeSlideout = document.getElementById('closeSlideout');
@@ -49,22 +19,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     signInBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        // Redirect to the authorization API sign-in page
-        window.location.href = 'https://your-auth-provider.com/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code';
+        window.location.href = 'login.html';
     });
 
-    signOutBtn.addEventListener('click', function(e) {
+    signOutBtn.addEventListener('click', async function(e) {
         e.preventDefault();
-        // Perform sign out logic here
-        console.log('User signed out');
-        signInBtn.classList.remove('hidden');
-        signOutBtn.classList.add('hidden');
+        try {
+            await signOut(auth);
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
     });
 
-    // Check if user is already signed in (you'd typically check this server-side or in local storage)
-    const isSignedIn = false; // Replace with actual check
-    if (isSignedIn) {
+    // Check if user is signed in
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
         signInBtn.classList.add('hidden');
         signOutBtn.classList.remove('hidden');
+    } else {
+        signInBtn.classList.remove('hidden');
+        signOutBtn.classList.add('hidden');
     }
 });
+

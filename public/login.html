@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login with Firebase - StudiWell</title>
     <link rel="stylesheet" href="styles/styles.css">
-    <script type="module" src="firebase-config.js" defer></script>
-    <script type="module" src="login.js" defer></script>
-    <script type="module" src="google-auth.js" defer></script>
-    <script type="module" src="github-auth.js" defer></script>
+    <script type="module" src="scripts/firebase-config.js" defer></script>
+    <script type="module" src="scripts/login.js" defer></script>
+    <script type="module" src="scripts/google-auth.js" defer></script>
+    <script type="module" src="scripts/github-auth.js" defer></script>
 </head>
 <body class="bg-custom-green">
     <header class="bg-white shadow-md">
@@ -59,7 +59,7 @@
                 Don't have an account? <a href="signup.html" class="text-blue-500 hover:underline">Sign Up</a>
             </p>
         </div>
-        <div class="social-login mt-4">
+        <div class="container mx-auto max-w-md mt-4">
             <button id="googleLoginBtn" class="bg-red-500 text-white w-full py-2 rounded hover:bg-red-600 transition mb-2">
                 Log in with Google
             </button>
