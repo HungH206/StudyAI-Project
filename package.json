@@ -3,13 +3,33 @@
   "version": "1.0.0",
   "main": "postcss.config.js",
   "scripts": {
+    "build": "react-scripts build",
     "build-css": "tailwindcss -i ./tailwind.css -o ./styles.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "A project for studying AI concepts and implementations.",
   "dependencies": {
-    "firebase": "^11.0.2"
+    "axios": "^1.7.9",
+    "firebase": "^11.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.14.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

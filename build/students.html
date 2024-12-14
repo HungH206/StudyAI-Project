@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Testimony - StudiWell</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+    <!-- Page 1: Home -->
+    <body class="bg-custom-green">
+        <header class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="images/Untitled 1.png" alt="StudiWell Logo" class="w-24 h-20">
+                    <h1 class="text-2xl font-bold text-gray-800 ml-4">StudiWell</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="index.html" class="text-gray-700 hover:text-gray-900">Home</a></li>
+                        <li><a href="aboutme.html" class="text-gray-700 hover:text-gray-900">About</a></li>
+                        <li><a href="students.html" class="text-gray-700 hover:text-gray-900">Student</a></li>
+                        <li><a href="features.html" class="text-gray-700 hover:text-gray-900">Feature</a></li>
+                    </ul>
+                </nav>
+                <div class="account-menu relative">
+                    <button id="accountBtn" class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
+                    <div id="accountSlideout" class="account-slideout fixed right-0 top-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+                        <div class="p-4">
+                            <h2 class="text-xl font-bold mb-4">Account</h2>
+                            <a href="login.html" id="signInBtn" class="block w-full text-center bg-blue-500 text-white px-4 py-2 rounded mb-2">Sign In</a>
+                            <a href="#" id="signOutBtn" class="block w-full text-center bg-red-500 text-white px-4 py-2 rounded mb-2 hidden">Sign Out</a>
+                            <button id="closeSlideout" class="mt-4 text-gray-600 hover:text-gray-800">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </header>
+    
+        <main class="container mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Student Testimonials</h1>
+            
+            <!-- Add your student testimonials here -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <p class="text-gray-700 mb-4">"StudiWell has been a game-changer for my academic performance. The AI study helper is like having a personal tutor available 24/7!"</p>
+                    <p class="font-semibold text-gray-900">- Sarah J., Computer Science Major</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <p class="text-gray-700 mb-4">"The mental health guidance feature has helped me maintain a healthy balance between my studies and personal life. I feel more in control and less stressed."</p>
+                    <p class="font-semibold text-gray-900">- Mike T., Psychology Student</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <p class="text-gray-700 mb-4">"Connecting with peer mentors through StudiWell has been incredibly helpful. I've learned so much from their experiences and advice."</p>
+                    <p class="font-semibold text-gray-900">- Emily R., Business Major</p>
+                </div>
+            </div>
+        </main>
+    
+        <script src="scripts/script.js"></script>
+    </body>
+    </html>
+    
+    

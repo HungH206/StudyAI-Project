@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - STDWELL</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+ <!-- Page 1: Home -->
+ <body class="bg-custom-green">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="images/Untitled 1.png" alt="StudiWell Logo" class="w-24 h-20">
+                <h1 class="text-2xl font-bold text-gray-800 ml-4">StudiWell</h1>
+            </div>
+            <div class="flex items-center space-x-6">
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="text-gray-700 hover:text-gray-900">Home</a></li>
+                    <li><a href="aboutme.html" class="text-gray-700 hover:text-gray-900">About</a></li>
+                    <li><a href="students.html" class="text-gray-700 hover:text-gray-900">Student</a></li>
+                    <li><a href="features.html" class="text-gray-700 hover:text-gray-900">Feature</a></li>
+                </ul>
+            </nav>
+            <div class="account-menu relative">
+                <button id="accountBtn" class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
+                <div id="accountSlideout" class="account-slideout fixed right-0 top-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+                    <div class="p-4">
+                        <h2 class="text-xl font-bold mb-4">Account</h2>
+                        <a href="login.html" id="signInBtn" class="block w-full text-center bg-blue-500 text-white px-4 py-2 rounded mb-2">Sign In</a>
+                        <a href="#" id="signOutBtn" class="block w-full text-center bg-red-500 text-white px-4 py-2 rounded mb-2 hidden">Sign Out</a>
+                        <button id="closeSlideout" class="mt-4 text-gray-600 hover:text-gray-800">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Main Features</h1>
+        
+        <div class="features space-y-12">
+            <section class="feature bg-white rounded-lg shadow-md p-6 grid md:grid-cols-2 gap-6">
+                <div>
+                    <h2 class="text-2xl font-semibold text-blue-600 mb-4">1/ AI Study Helper + Chatbot</h2>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>An intelligent companion that helps you study more effectively.</li>
+                        <li>Get personalized recommendations and instant answers to your questions.</li>
+                        <li>Personalize habit system that fits your schedule!</li>
+                    </ul>
+                </div>
+                <div class="feature-card bg-pink-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">AI Chatbot Companion</h3>
+                    <div class="chatbot-placeholder bg-white p-4 rounded border border-pink-200 text-gray-500">
+                        Generating Recommendations...
+                    </div>
+                </div>
+            </section>
+
+            <section class="feature bg-white rounded-lg shadow-md p-6 grid md:grid-cols-2 gap-6">
+                <div>
+                    <h2 class="text-2xl font-semibold text-blue-600 mb-4">2/ Personalize Mental Health Guidance</h2>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Empower students to maintain mental health, study more effective.</li>
+                        <li>Regular health check-ins & provide feedbacks</li>
+                        <li>Personalize habit system that fits your schedule!</li>
+                    </ul>
+                </div>
+                <div class="flex justify-center items-center">
+                    <img src="images/MentalHealth.png" alt="Mental Health Icon" class="w-50 h-auto">
+                </div>
+            </section>
+
+            <section class="feature bg-white rounded-lg shadow-md p-6 grid md:grid-cols-2 gap-6">
+                <div>
+                    <h2 class="text-2xl font-semibold text-blue-600 mb-4">3/ Support and Connections From Mentors</h2>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Connect students with peer mentors for academic support.</li>
+                        <li>Facilitate group study sessions and discussions.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="images/ExampleConnection.png" alt="Connections Icon" class="w-150 h-auto mb-4">
+                    <div class="mentor-icons flex space-x-2">
+                        <!-- Add 5 circular divs with user icons here -->
+                        <!--div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                        <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                        <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                        <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                        <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                </div-->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
