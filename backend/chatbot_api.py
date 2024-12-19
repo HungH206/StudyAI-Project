@@ -58,3 +58,4 @@ async def read_root():
 @app.get("/favicon.ico")
 async def favicon():
     return "", 204
+
