@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* If you need to add custom Tailwind classes, use @apply */
+.custom-button {
+    @apply bg-blue-500 text-white p-2 rounded;
+  }
+  
+  /* Example of global customization */
+  body {
+    font-family: 'Inter', sans-serif;
+  }
