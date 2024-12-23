@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const WelcomePage = () => {
   // This would typically be fetched from your authentication state
-  const user = { name: 'John Doe' };
+  const user = { name: 'Guest' };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -14,7 +14,7 @@ const WelcomePage = () => {
         
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-4">Get Started</h2>
+            <h2 className="text-2xl font-semibold mb-4">Get Started With Our Features:</h2>
             <ul className="space-y-2">
               <li>
                 <Link to="/features" className="text-blue-600 hover:underline">Explore our features</Link>
@@ -29,7 +29,7 @@ const WelcomePage = () => {
           </div>
           
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-4">Your Stats</h2>
+            <h2 className="text-2xl font-semibold mb-4">Your Stats:</h2>
             <p>Study streak: 5 days</p>
             <p>Tasks completed this week: 12</p>
             <p>Next study session: Today at 3 PM</p>
