@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Layout from '@/components/layout'; // Importing shared layout for consistency
+import { Button } from '@/components/ui/button'; // Reusable button component
+import { Input } from '@/components/ui/input'; // Reusable input component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Card UI components
+import { ScrollArea } from '@/components/ui/scroll-area'; // Scrollable area
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'; // Avatar for chat messages
 
-
-const Chatbot = () => {
+const AiAssistantPage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +28,7 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,37 +67,44 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="flex flex-col h-[500px] w-full max-w-md mx-auto border rounded-lg overflow-hidden">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message, index) => (
-          <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-xs p-3 rounded-lg ${message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-              {message.text}
+    <Layout>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">AI Study Assistant</h1>
+        <Card className="max-w-2xl mx-auto">
+          <CardHeader>
+            <CardTitle>Chat with Your AI Assistant</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ScrollArea className="h-[400px] pr-4">
+              {messages.map((message, index) => (
+                <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'} mb-4`}>
+                  <div className={`flex items-start ${message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback>{message.sender === 'user' ? 'U' : 'AI'}</AvatarFallback>
+                    </Avatar>
+                    <div className={`mx-2 p-3 rounded-lg ${message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                      {message.text}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </ScrollArea>
+            <div className="flex mt-4">
+              <Input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your message here..."
+                className="flex-grow mr-2"
+                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              />
+              <Button onClick={sendMessage}>Send</Button>
             </div>
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
+          </CardContent>
+        </Card>
       </div>
-      <form onSubmit={sendMessage} className="flex p-4 bg-gray-100">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="flex-1 p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Type a message..."
-          disabled={isLoading}
-        />
-        <button 
-          type="submit" 
-          className="px-4 py-2 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
-          disabled={isLoading}
-        >
-          {isLoading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-    </div>
+    </Layout>
   );
 };
 
-export default Chatbot;
-
+export default AiAssistantPage;
