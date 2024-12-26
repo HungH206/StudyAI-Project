@@ -4,6 +4,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.core.credentials import AzureKeyCredential
 import os
 import logging
+from dotenv import load_dotenv
+load_dotenv()  # Add this line at the top of your imports
+
 
 # Logging setup
 logging.basicConfig(level=logging.DEBUG)
@@ -13,8 +16,10 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Phi-3.5 Mini Chatbot API")
 
 # Azure configuration
-AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "https://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com")
-AZURE_API_KEY = os.getenv("AZURE_API_KEY", "XLnL0L2hehCJMIAeIa17T4IdxOJwFpkU")
+AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "https://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com/v1/chat/completions")
+AZURE_API_KEY = os.getenv("AZURE_INFERENCE_CREDENTIAL")
+if not AZURE_API_KEY:
+    raise ValueError("AZURE_API_KEY environment variable is not set")
 MODEL_NAME = os.getenv("MODEL_NAME", "phi3-mini-4k")
 
 # Initialize Azure client
