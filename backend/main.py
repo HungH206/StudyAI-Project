@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from azure.ai.inference import ChatCompletionsClient
 from azure.core.credentials import AzureKeyCredential
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import logging
 from dotenv import load_dotenv
@@ -14,6 +15,14 @@ logger = logging.getLogger(__name__)
 
 # FastAPI app
 app = FastAPI(title="Phi-3.5 Mini Chatbot API")
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "https://<frontend-domain>"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Azure configuration
 AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "https://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com/v1/chat/completions")

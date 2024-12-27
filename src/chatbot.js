@@ -36,7 +36,7 @@ const res = await axios.post(
       renderMessages();
   
       try {
-        const response = await fetch('http://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com/api/chat', {
+        const response = await fetch('http://0.0.0.0.8000/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: input })

@@ -1,25 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import Link from 'next/link'
+import Layout from '../components/layout'
+import { Button } from "../components/ui/button"
 
-const HomePage = () => {
+export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Welcome to StudiWell</h1>
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-semibold mb-4">AI-Powered Study Assistance</h2>
-          <p className="mb-4">Get personalized study recommendations and instant answers to your questions with our advanced AI technology.</p>
-          <Link to="/features" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Learn More</Link>
+    <Layout>
+      <main className="main-section bg-gray-100 py-16">
+        <div className="hero-content text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to StudiWell</h1>
+          <p className="text-xl text-gray-700 mb-8">
+            A Study Companion With Mental Health Tracking Functionality,<br />
+            Powered by Azure software with AI integration.
+          </p>
+          <div className="space-y-4">
+            <Button asChild size="lg" className="bg-blue-500 hover:bg-blue-600 text-white w-48">
+              <Link href="/login">Try out now</Link>
+            </Button>
+            <div>
+              <Button asChild size="lg" variant="outline" className="border-blue-500 text-blue-500 hover:bg-blue-50 w-48">
+                <Link href="/welcome">View Demo Here</Link>
+              </Button>
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-semibold mb-4">Mental Health Support</h2>
-          <p className="mb-4">Access resources and tools to maintain your mental well-being while managing your academic life.</p>
-          <Link to="/features" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Explore</Link>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default HomePage;
-
+      </main>
+    </Layout>
+  )
+}
