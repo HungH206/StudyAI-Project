@@ -1,14 +1,14 @@
 {
   "name": "studyai-project",
   "version": "1.0.0",
-  "main": "index.jsx",
+  "main": "index.html",
   "scripts": {
     "start": "npm run build:css && craco start",
     "build": "npm run build:css && craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
-    "build:css": "postcss src/tailwind.css -o public/styles/styles.css"
+    "build:css": "postcss public/styles/index.css -o public/styles/styles.css"
   },
   "keywords": [],
   "author": "",

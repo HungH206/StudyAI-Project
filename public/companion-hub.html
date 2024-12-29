@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companion Hub - Email Communication</title>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body class="bg-custom-green">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="images/Untitled 1.png" alt="StudiWell Logo" class="w-24 h-20">
+                <h1 class="text-2xl font-bold text-gray-800 ml-4">StudiWell</h1>
+            </div>
+            <div class="flex items-center space-x-6">
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="index.html" class="text-gray-700 hover:text-gray-900">Home</a></li>
+                        <li><a href="aboutme.html" class="text-gray-700 hover:text-gray-900">About</a></li>
+                        <li><a href="students.html" class="text-gray-700 hover:text-gray-900">Student</a></li>
+                        <li><a href="features.html" class="text-gray-700 hover:text-gray-900">Feature</a></li>
+                    </ul>
+                </nav>
+                <div class="account-menu relative">
+                    <button id="accountBtn" class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
+                    <div id="accountSlideout" class="account-slideout fixed right-0 top-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+                        <div class="p-4">
+                            <h2 class="text-xl font-bold mb-4">Account</h2>
+                            <a href="login.html" id="signInBtn" class="block w-full text-center bg-blue-500 text-white px-4 py-2 rounded mb-2">Sign In</a>
+                            <a href="#" id="signOutBtn" class="block w-full text-center bg-red-500 text-white px-4 py-2 rounded mb-2 hidden">Sign Out</a>
+                            <button id="closeSlideout" class="mt-4 text-gray-600 hover:text-gray-800">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <body>
+        <div class="container">
+          <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Companion Hub - Email Communication</h1>
+          <div class="mb-4">
+            <a href="/welcome" class="btn">Back to Welcome</a>
+          </div>
+          <div class="grid">
+            <!-- Compose Email Card -->
+            <div class="card">
+              <div class="card-header">
+                <h2 class="font-semibold">Compose Email</h2>
+              </div>
+              <div class="space-y-4">
+                <select id="counselor-select" class="btn">
+                  <option value="" disabled selected>Select a counselor</option>
+                  <option value="1">Taylor S. - Academic Counseling</option>
+                  <option value="2">Dr. Alex Johnson - Mental Health</option>
+                  <option value="3">Prof. Maria Garcia - Career Guidance</option>
+                </select>
+                <div id="counselor-info" class="space-y-2 text-gray-500" style="display: none;">
+                  <p id="counselor-name" class="font-semibold"></p>
+                  <p id="counselor-email"></p>
+                </div>
+                <input id="email-subject" type="text" placeholder="Subject" class="btn">
+                <textarea id="email-body" placeholder="Your message" rows="6" class="btn"></textarea>
+                <button id="send-email" class="btn" disabled>Send Email</button>
+              </div>
+            </div>
+      
+            <!-- Email History Card -->
+            <div class="card">
+              <div class="card-header">
+                <h2 class="font-semibold">Email History</h2>
+              </div>
+              <div class="space-y-4">
+                <h3 class="font-semibold">Received Emails</h3>
+                <div id="received-emails" class="space-y-2 text-gray-500">
+                  <p>No received emails yet.</p>
+                </div>
+      
+                <h3 class="font-semibold">Sent Emails</h3>
+                <div id="sent-emails" class="space-y-2 text-gray-500">
+                  <p>No sent emails yet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          const counselors = [
+            { id: 1, name: "Taylor S.", specialty: "Academic Counseling", email: "taylor.s@studiwell.com" },
+            { id: 2, name: "Dr. Alex Johnson", specialty: "Mental Health", email: "alex.johnson@studiwell.com" },
+            { id: 3, name: "Prof. Maria Garcia", specialty: "Career Guidance", email: "maria.garcia@studiwell.com" }
+          ];
+      
+          const selectElement = document.getElementById('counselor-select');
+          const counselorInfo = document.getElementById('counselor-info');
+          const counselorName = document.getElementById('counselor-name');
+          const counselorEmail = document.getElementById('counselor-email');
+          const emailSubject = document.getElementById('email-subject');
+          const emailBody = document.getElementById('email-body');
+          const sendEmailButton = document.getElementById('send-email');
+          const receivedEmails = document.getElementById('received-emails');
+          const sentEmails = document.getElementById('sent-emails');
+      
+          selectElement.addEventListener('change', () => {
+            const selectedCounselor = counselors.find(c => c.id === parseInt(selectElement.value));
+            if (selectedCounselor) {
+              counselorInfo.style.display = 'block';
+              counselorName.textContent = selectedCounselor.name;
+              counselorEmail.textContent = selectedCounselor.email;
+              sendEmailButton.disabled = false;
+            } else {
+              counselorInfo.style.display = 'none';
+              sendEmailButton.disabled = true;
+            }
+          });
+      
+          sendEmailButton.addEventListener('click', () => {
+            if (emailSubject.value && emailBody.value) {
+              const sentEmail = document.createElement('div');
+              sentEmail.innerHTML = `<p class="font-semibold">${emailSubject.value}</p><p>To: ${counselorEmail.textContent}</p>`;
+              sentEmails.appendChild(sentEmail);
+              emailSubject.value = '';
+              emailBody.value = '';
+            }
+          });
+        </script>
+      </body>
+      </html>
+      
