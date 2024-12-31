@@ -1,12 +1,7 @@
 const MAX_MESSAGES = 50; // Limit message history
-const API_URL = process.env.REACT_APP_API_URL || 'http:////Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com/api/chat';
+const API_URL = 'http://localhost:8000/chat'; // Chat API URL
 
 
-const res = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/chat`,
-    { messages: updatedMessages }
-  );
-  
   document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chatMessages');
     const userInput = document.getElementById('userInput');
@@ -36,10 +31,17 @@ const res = await axios.post(
       renderMessages();
   
       try {
-        const response = await fetch('http://0.0.0.0.8000/chat', {
+        const response = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: input })
+          body: JSON.stringify({
+            messages: [{ role: "user", content: input }],  // Wrap input in a list with role and content
+            max_tokens: 2048,
+            temperature: 0.8,
+            top_p: 0.9,
+            presence_penalty: 0,
+            frequency_penalty: 0
+          })
         });
         const data = await response.json();
         messages.push({ content: data.response, sender: 'bot' });

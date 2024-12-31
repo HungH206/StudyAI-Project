@@ -22,17 +22,22 @@ function initializeApp() {
                 A Study Companion With Mental Health Tracking Functionality,<br>
                 Powered by Azure software with AI integration.
             </p>
+            <p class="text-xl text-gray-700 mb-8">
+                This app is currently opperate in the demo version of the app.
+            </p>
             <a href="login.html" class="btn bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Try out now</a>
             <p class="text-gray-700 mt-4" style="margin-top: 0.75rem; margin-bottom: 0.75rem;">Or<br></p>
             <a href="welcomePage.html" class="btn bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">View Demo Here!</a>
         </div>
 `;
-    const card = createCard({ content: mainContent });
-
+    const card = createCard({
+         content: mainContent,
+        imageUrl: 'images/Group 33.png',
+    });
     // Create the layout
     const layout = createLayout({
         header: header.outerHTML,
-        children: mainContent,
+        children: card.outerHTML,
         footer: footer.outerHTML,
     });
 

@@ -19,13 +19,13 @@ app = FastAPI(title="Phi-3.5 Mini Chatbot API")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://<frontend-domain>"],
+    allow_origins=["https://studiwellaiauth0.web.app", "http://localhost:3000"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Azure configuration
-AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "https://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com/v1/chat/completions")
+AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "https://Phi-3-mini-4k-instruct-lqhmi.eastus2.models.ai.azure.com/")
 AZURE_API_KEY = os.getenv("AZURE_INFERENCE_CREDENTIAL")
 if not AZURE_API_KEY:
     raise ValueError("AZURE_API_KEY environment variable is not set")
