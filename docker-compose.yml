@@ -1,8 +1,11 @@
 version: '3.8'
 
 services:
-  chatbot-api:
-    build: ./backend
+ backend:
+    image: chatbot-api:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     environment:
