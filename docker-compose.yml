@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
  backend:
-    image: chatbot-api:latest
+    image: studiwellchatcontainery.azurecr.io/chatbot-api:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -17,7 +17,7 @@ services:
     volumes:
       - ./backend:/app
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://localhost:8000/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3

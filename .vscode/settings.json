@@ -31,5 +31,5 @@
         ".vscode{,/**}"
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/b7cc4711-4d61-4b3d-b26c-c222c1b5e233/resourceGroups/StudiwellProj/providers/Microsoft.Web/sites/StudiwellAI",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": "deployment.zip"
 }

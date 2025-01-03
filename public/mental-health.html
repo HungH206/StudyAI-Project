@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health Tracker</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <script type="module" src="scripts/mental-health.js"></script>
+  <style>
+    /* Basic styling for layout and components */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .card {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #fff9f9;
+      border-radius: 8px;
+    }
+    .button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .button:hover {
+      background-color: #2980b9;
+    }
+    .slider-container {
+      margin: 1rem 0;
+    }
+    .tip {
+      margin: 1rem 0;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+  <body class="bg-custom-green">
+    <header class="bg-white shadow-md">
+      <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+          <div class="flex items-center">
+              <img src="images/Untitled 1.png" alt="StudiWell Logo" class="w-24 h-20">
+              <h1 class="text-2xl font-bold text-gray-800 ml-4">StudiWell</h1>
+          </div>
+          <div class="flex items-center space-x-6">
+          <nav>
+              <ul class="flex space-x-4">
+                  <li><a href="index.html" class="text-gray-700 hover:text-gray-900">Home</a></li>
+                  <li><a href="aboutme.html" class="text-gray-700 hover:text-gray-900">About</a></li>
+                  <li><a href="students.html" class="text-gray-700 hover:text-gray-900">Student</a></li>
+                  <li><a href="features.html" class="text-gray-700 hover:text-gray-900">Feature</a></li>
+              </ul>
+          </nav>
+          <div class="account-menu relative">
+              <button id="accountBtn" class="account-button bg-blue-500 text-white px-4 py-2 rounded">My Account</button>
+              <div id="accountSlideout" class="account-slideout fixed right-0 top-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+                  <div class="p-4">
+                      <h2 class="text-xl font-bold mb-4">Account</h2>
+                      <a href="login.html" id="signInBtn" class="block w-full text-center bg-blue-500 text-white px-4 py-2 rounded mb-2">Sign In</a>
+                      <a href="#" id="signOutBtn" class="block w-full text-center bg-red-500 text-white px-4 py-2 rounded mb-2 hidden">Sign Out</a>
+                      <button id="closeSlideout" class="mt-4 text-gray-600 hover:text-gray-800">Close</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </header>
+
+<!-- Back Button -->
+<a href="/welcomePage.html" class="button">Back to Welcome</a>
+
+<!-- Mood Tracker -->
+<div class="card">
+  <h2>Daily Mood Check</h2>
+  <div id="mood-options">
+    <!-- Radio buttons will be added dynamically -->
+  </div>
+</div>
+
+<!-- Stress Level -->
+<div class="card">
+  <h2>Stress Level</h2>
+  <div class="slider-container">
+    <input type="range" id="stress-slider" min="0" max="10" step="1" value="5">
+    <p>Your stress level: <span id="stress-value">5</span> / 10</p>
+  </div>
+</div>
+
+<!-- Wellness Tip -->
+<div class="card">
+  <h2>Wellness Tip</h2>
+  <p id="wellness-tip">Click the button below to get a wellness tip!</p>
+</div>
+
+<!-- Save Entry -->
+<div style="text-align: center;">
+  <button class="button" id="save-entry">Save Today's Entry</button>
+</div>
+</div>
+
+
+</body>
+</html>
