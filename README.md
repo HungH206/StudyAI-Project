@@ -18,7 +18,7 @@ Features:
     - Facilitate group study sessions and discussions.
     - Provide a platform for sharing study materials and resources.
 
-4. Smart Schedule Management (Currently In Development, Comming Soon)
+4. Smart Schedule Management (Currently In Development, Coming Soon)
     - Automatically organize and prioritize tasks and deadlines.
     - Sync with academic calendars and provide reminders.
     - Suggest optimal study times based on the student's schedule.
