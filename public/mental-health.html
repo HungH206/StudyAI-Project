@@ -5,56 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mental Health Tracker</title>
   <link rel="stylesheet" href="styles/styles.css">
-  <script type="module" src="scripts/mental-health.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="scripts/mental-health.js"></script>
   <style>
     /* Basic styling for layout and components */
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #2c3e50;
-    }
-    .card {
-      margin: 1rem 0;
-      padding: 1rem;
-      border: 1px solid #fff9f9;
-      border-radius: 8px;
-    }
-    .button {
-      background-color: #3498db;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .button:hover {
-      background-color: #2980b9;
-    }
-    .slider-container {
-      margin: 1rem 0;
-    }
-    .tip {
-      margin: 1rem 0;
-      font-weight: bold;
-      text-align: center;
-    }
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .card {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #fff9f9;
+            border-radius: 8px;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .slider-container {
+            margin: 1rem 0;
+        }
+        .tip {
+            margin: 1rem 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        #moodChart {
+            max-width: 600px;
+            max-height: 300px;
+            margin: auto;
+        }
   </style>
   <body class="bg-custom-green">
     <header class="bg-white shadow-md">
@@ -88,37 +92,71 @@
   </header>
 
 <!-- Back Button -->
-<a href="/welcomePage.html" class="button">Back to Welcome</a>
-
-<!-- Mood Tracker -->
-<div class="card">
-  <h2>Daily Mood Check</h2>
-  <div id="mood-options">
-    <!-- Radio buttons will be added dynamically -->
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Mental Health Tracker</h1>
+  <div class="mb-4">
+    <a href="welcomePage.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Back to Welcome</a>
   </div>
-</div>
 
-<!-- Stress Level -->
-<div class="card">
-  <h2>Stress Level</h2>
-  <div class="slider-container">
-    <input type="range" id="stress-slider" min="0" max="10" step="1" value="5">
-    <p>Your stress level: <span id="stress-value">5</span> / 10</p>
+<!-- Main Container -->
+<div class="container mx-auto p-8">
+
+  <!-- Grid Layout for Daily Mood and Stress Level -->
+  <div class="grid md:grid-cols-2 gap-12 mt-12">
+      
+      <!-- Daily Mood Check Card -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6">Daily Mood Check</h2>
+          <div id="mood-options" class="grid grid-cols-3 gap-4">
+              <!-- Mood buttons will be generated in JS -->
+          </div>
+      </div>
+
+      <!-- Stress Levels Bar -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6">Stress Level</h2>
+          <input type="range" id="stress-slider" min="0" max="10" step="1" value="5" class="w-full">
+          <p class="mt-4 text-lg">Your stress level: <span id="stress-value" class="font-bold text-blue-600">5</span> / 10</p>
+      </div>
   </div>
+
+  <!-- Grid Layout for Chart and Wellness Tip -->
+  <div class="grid md:grid-cols-2 gap-12 mt-12">
+
+      <!-- Mood & Stress Trends Chart -->
+      <div class="bg-white rounded-lg shadow-lg p-8 h-[400px]">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6">Mood & Stress Trends</h2>
+          <canvas id="moodChart" class="w-full h-full"></canvas>
+      </div>
+
+      <!-- Wellness Tip Generator -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6">Wellness Suggestions</h2>
+          <p id="wellness-tip" class="text-lg mb-6">Click the button below for a wellness tip!</p>
+          <!--button class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out" 
+                  id="generate-tip">
+              Generate Tip
+          </button-->
+      </div>
+  </div>
+
 </div>
 
-<!-- Wellness Tip -->
-<div class="card">
-  <h2>Wellness Tip</h2>
-  <p id="wellness-tip">Click the button below to get a wellness tip!</p>
 </div>
-
 <!-- Save Entry -->
 <div style="text-align: center;">
   <button class="button" id="save-entry">Save Today's Entry</button>
 </div>
-</div>
 
+
+ <!-- Script to Initialize Chart After Page Load -->
+ <script>
+  window.addEventListener('DOMContentLoaded', function () {
+      import('./scripts/mental-health.js').then(module => {
+          module.initializeChart();
+      });
+  });
+</script>
 
 </body>
 </html>
