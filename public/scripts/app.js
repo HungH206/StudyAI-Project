@@ -23,7 +23,7 @@ function initializeApp() {
                 Powered by Azure software with AI integration.
             </p>
             <p class="text-xl text-gray-700 mb-8">
-                This app is currently operate in the demo version.
+                This app is currently operating in the demo version.
             </p>
             <a href="login.html" class="btn bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Try out now</a>
             <p class="text-gray-700 mt-4" style="margin-top: 0.75rem; margin-bottom: 0.75rem;">Or<br></p>
