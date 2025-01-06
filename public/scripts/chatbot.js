@@ -14,7 +14,7 @@ const API_URL = 'http://localhost:8000/chat'; // Chat API URL
     const renderMessages = () => {
       chatMessages.innerHTML = messages.map(message => `
         <div class="flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'} mb-4">
-          <div class="max-w-xs p-3 rounded-lg ${message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}">
+          <div class="p-3 rounded-lg ${message.sender === 'user' ? 'bg-blue-500 text-white max-w-xs text-right' : 'bg-white text-gray-900 max-w-xs'} w-full">
             ${message.content}
           </div>
         </div>

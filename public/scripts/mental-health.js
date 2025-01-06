@@ -1,135 +1,125 @@
+
 document.addEventListener("DOMContentLoaded", () => {
-  const moodOptions = ['very sad', 'sad', 'neutral', 'happy', 'very happy'];
-  const wellnessTips = [
-      "Take a few deep breaths to center yourself.",
-      "Try to get at least 7-8 hours of sleep tonight.",
-      "Take a short walk to clear your mind.",
-      "Reach out to a friend or family member for support.",
-      "Practice gratitude by listing three things you're thankful for.",
-      "Unplug from social media for an hour.",
-      "Take a 10-minute break to practice mindfulness."
-  ];
+    const moodOptions = ['very sad', 'sad', 'neutral', 'happy', 'very happy'];
+    const wellnessTips = [
+        "Take a few deep breaths to center yourself.",
+        "Try to get at least 7-8 hours of sleep tonight.",
+        "Take a short walk to clear your mind.",
+        "Reach out to a friend or family member for support.",
+        "Practice gratitude by listing three things you're thankful for.",
+        "Unplug from social media for an hour.",
+        "Take a 10-minute break to practice mindfulness."
+    ];
 
-  // References to DOM elements
-  const moodOptionsContainer = document.getElementById("mood-options");
-  const stressSlider = document.getElementById("stress-slider");
-  const stressValueDisplay = document.getElementById("stress-value");
-  const wellnessTipDisplay = document.getElementById("wellness-tip");
-  const saveEntryButton = document.getElementById("save-entry");
-  const chartCanvas = document.getElementById("moodChart").getContext("2d");
+    // References to DOM elements
+    const moodOptionsContainer = document.getElementById("mood-options");
+    const stressSlider = document.getElementById("stress-slider");
+    const stressValueDisplay = document.getElementById("stress-value");
+    const wellnessTipDisplay = document.getElementById("wellness-tip");
+    const saveEntryButton = document.getElementById("save-entry");
+    const chartCanvas = document.getElementById("moodChart").getContext("2d");
 
-  // Initialize default state
-  let selectedMood = 'neutral';
-  let stressLevel = 5;
-  const moodData = [];
-  const stressData = [];
-  const labels = [];
-  let moodChart;
+    let selectedMood = 'neutral';
+    let stressLevel = 5;
+    const moodData = [];
+    const stressData = [];
+    const labels = [];
+    let moodChart;
 
-  // Populate mood options
-  moodOptions.forEach(option => {
-      const wrapper = document.createElement("div");
-      wrapper.style.marginBottom = "10px";
+    // Load existing entries from localStorage
+    const storedEntries = JSON.parse(localStorage.getItem("mentalHealthEntries")) || { moodData: [], stressData: [], labels: [] };
+    if (storedEntries) {
+    Object.assign({ moodData, stressData, labels }, storedEntries);
+}
 
-      const radioButton = document.createElement("input");
-      radioButton.type = "radio";
-      radioButton.id = option;
-      radioButton.name = "mood";
-      radioButton.value = option;
-      if (option === selectedMood) radioButton.checked = true;
-      radioButton.addEventListener("change", () => {
-          selectedMood = option;
-          console.log(`Mood selected: ${selectedMood}`);
-      });
+    // Populate mood options dynamically
+    moodOptions.forEach(option => {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("mood-option");
 
-      const label = document.createElement("label");
-      label.htmlFor = option;
-      label.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+        const radioButton = document.createElement("input");
+        radioButton.type = "radio";
+        radioButton.id = option;
+        radioButton.name = "mood";
+        radioButton.value = option;
+        if (option === selectedMood) radioButton.checked = true;
+        radioButton.addEventListener("change", () => selectedMood = option);
 
-      wrapper.appendChild(radioButton);
-      wrapper.appendChild(label);
-      moodOptionsContainer.appendChild(wrapper);
-  });
+        const label = document.createElement("label");
+        label.htmlFor = option;
+        label.textContent = option.charAt(0).toUpperCase() + option.slice(1);
 
-  // Handle stress slider change
-  stressSlider.addEventListener("input", (event) => {
-      stressLevel = event.target.value;
-      stressValueDisplay.textContent = stressLevel;
-      console.log(`Stress level: ${stressLevel}`);
-  });
+        wrapper.appendChild(radioButton);
+        wrapper.appendChild(label);
+        moodOptionsContainer.appendChild(wrapper);
+    });
 
-  // Generate a random wellness tip
-  const generateWellnessTip = () => {
-      const randomTip = wellnessTips[Math.floor(Math.random() * wellnessTips.length)];
-      wellnessTipDisplay.textContent = randomTip;
-      console.log(`Wellness Tip: ${randomTip}`);
-  };
+    // Stress Slider Logic
+    stressSlider.addEventListener("input", (event) => {
+        stressLevel = event.target.value;
+        stressValueDisplay.textContent = stressLevel;
+    });
 
-// Update Chart.js
-  // Function to update the chart
-  const updateChart = () => {
-    moodChart.update();
-  };
+    // Generate a Wellness Tip
+    const generateWellnessTip = () => {
+        const randomTip = wellnessTips[Math.floor(Math.random() * wellnessTips.length)];
+        wellnessTipDisplay.textContent = randomTip;
+    };
 
-  // Initialize Chart.js
-  const initializeChart = () => {
-      moodChart = new Chart(chartCanvas, {
-          type: "line",
-          data: {
-              labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-              datasets: [
-                  {
-                      label: "Mood (0: Very Sad, 5: Very Happy)",
-                      data: moodData,
-                      borderColor: "blue",
-                      fill: false,
-                      tension: 0.3
-                  },
-                  {
-                      label: "Stress Level (0-10)",
-                      data: stressData,
-                      borderColor: "red",
-                      fill: false,
-                      tension: 0.3
-                  }
-              ]
-          },
-          options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              scales: {
-                  y: {
-                      beginAtZero: true,
-                      suggestedMax: 10
-                  }
-              }
-          }
-      });
-  };
+    // Initialize Chart
+    const initializeChart = () => {
+        moodChart = new Chart(chartCanvas, {
+            type: "line",
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
+                datasets: [
+                    {
+                        label: "Mood (0: Very Sad, 5: Very Happy)",
+                        data: moodData,
+                        borderColor: "blue",
+                        fill: false
+                    },
+                    {
+                        label: "Stress Level (0-10)",
+                        data: stressData,
+                        borderColor: "red",
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    };
 
-// Call initializeChart after DOM content is loaded
-initializeChart();
+    initializeChart();
 
-  // Add event listener to save entry
-  saveEntryButton.addEventListener("click", () => {
-    console.log("Saving Entry...");
-    console.log(`Mood: ${selectedMood}, Stress Level: ${stressLevel}`);
+    // Save Entry Logic
+    saveEntryButton.addEventListener("click", async () => {
+        console.log("Saving Entry...");
+        console.log(`Mood: ${selectedMood}, Stress Level: ${stressLevel}`);
+        const currentDate = new Date().toLocaleDateString();
+        labels.push(currentDate);
+        moodData.push(moodOptions.indexOf(selectedMood));
+        stressData.push(Number(stressLevel));
 
-    // Save data
-    const currentDate = new Date().toLocaleDateString();
-    labels.push(currentDate);
-    moodData.push(moodOptions.indexOf(selectedMood));
-    stressData.push(Number(stressLevel));
+        moodChart.update();
 
-    // Update Chart
-    updateChart();
+        const entryData = {
+            date: currentDate,
+            mood: selectedMood,
+            stressLevel: stressLevel
+        };
 
-    // Generate a new wellness tip
-    generateWellnessTip();
-    alert("Your entry has been saved!");
-});
+       // Save to localStorage
+       localStorage.setItem("mentalHealthEntries", JSON.stringify({ moodData, stressData, labels }));
+       alert("Entry saved successfully!");
+       generateWellnessTip();
+       moodChart.update();
 
- // Display an initial wellness tip
- generateWellnessTip();
+    });
 
+    generateWellnessTip();    
 });

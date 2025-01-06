@@ -6,7 +6,8 @@
   <title>Mental Health Tracker</title>
   <link rel="stylesheet" href="styles/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="scripts/mental-health.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@azure/storage-blob@12.9.0/dist/azure-storage-blob.min.js"></script>
+  <script src="scripts/mental-health.js" defer></script>
   <style>
     /* Basic styling for layout and components */
     body {
@@ -148,14 +149,18 @@
 </div>
 
 
+<!--button id="export-data">Export Data as CSV</button-->
+<canvas id="moodChart"></canvas>
+
  <!-- Script to Initialize Chart After Page Load -->
- <script>
-  window.addEventListener('DOMContentLoaded', function () {
-      import('./scripts/mental-health.js').then(module => {
-          module.initializeChart();
-      });
-  });
-</script>
+ <!--script type="module">
+    import { initializeChart } from './Mental-health.js';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initializeChart();
+    });
+</script--> 
+
 
 </body>
 </html>

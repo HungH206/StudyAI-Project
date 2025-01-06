@@ -15,6 +15,7 @@
   "license": "ISC",
   "description": "A project for studying AI concepts and implementations.",
   "dependencies": {
+    "@azure/storage-blob": "^12.26.0",
     "@radix-ui/react-slot": "^1.1.1",
     "@types/react-dom": "^19.0.2",
     "axios": "^1.7.9",
